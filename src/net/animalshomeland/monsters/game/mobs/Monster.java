@@ -14,6 +14,7 @@ import org.bukkit.entity.EntityType;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 public abstract class Monster {
@@ -79,9 +80,10 @@ public abstract class Monster {
             wave.end();
         }
 
-        for(Entity entity1 : wave.getLiving().keySet()) {
-            if(entity1.isDead() || !entity1.isTicking()) {
-                wave.getLiving().remove(entity1).die();
+        for (Iterator<Entity> iterator = wave.getLiving().keySet().iterator(); iterator.hasNext();) {
+            Entity entity = iterator.next();
+            if(entity.isDead() || !entity.isTicking()) {
+                wave.getLiving().remove(entity).die();
             }
         }
     }

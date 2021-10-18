@@ -32,8 +32,6 @@ public class Wave {
     @Getter
     private long beginningTime;
 
-    private BukkitTask bukkitTask;
-
     public Wave(int waveNr) {
         defaultCounter = Monsters.getInstance().getGameConfig().getConfigFile().getInt("wave-warmup-timer");
         if(waveNr == 1) {
@@ -131,7 +129,7 @@ public class Wave {
         Monsters.getInstance().getGame().setGameState(GameState.WAVE_WARUMUP);
         Monsters.getInstance().getGame().getGameMap().changeTime();
         Player player = Monsters.getInstance().getGame().getPlayer();
-        bukkitTask = new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
                 if(counter > 0) {
