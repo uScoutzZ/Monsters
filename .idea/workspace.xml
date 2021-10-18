@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Monsters" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:github" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7872541e-49ed-4fb6-962f-a70296df3f3b" name="Default Changelist" comment="Fixed a bug where despawned monsters did not get killed &amp; removed correctly">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Monsters.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Monsters.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="final" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.1.2\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1rl8VLKKwP2Mml1V4AXXUWD2Jwt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="G:/Desktop/AnimalsHomeland" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.35977012" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7872541e-49ed-4fb6-962f-a70296df3f3b" name="Default Changelist" comment="" />
+      <created>1619539340304</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1619539340304</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Monsters for AnimalsHomeland.net">
+      <created>1622391004516</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1622391004516</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Monsters for AnimalsHomeland.net">
+      <created>1625413718448</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1625413718448</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Monsters for AnimalsHomeland.net">
+      <created>1634304652027</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1634304652027</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fixed a bug where despawned monsters did not get killed &amp; removed correctly">
+      <created>1634516204792</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1634516204792</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fixed a bug where despawned monsters did not get killed &amp; removed correctly">
+      <created>1634583338688</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1634583338688</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:org.ow2.asm:asm-analysis" />
+    <option featureType="dependencySupport" implementationName="java:net.md-5:bungeecord-chat" />
+    <option featureType="dependencySupport" implementationName="java:org.ow2.asm:asm-tree" />
+    <option featureType="dependencySupport" implementationName="java:com.comphenix.protocol:ProtocolLib" />
+    <option featureType="dependencySupport" implementationName="java:org.hamcrest:hamcrest-core" />
+    <option featureType="dependencySupport" implementationName="java:commons-lang:commons-lang" />
+    <option featureType="dependencySupport" implementationName="java:org.projectlombok:lombok" />
+    <option featureType="dependencySupport" implementationName="java:junit:junit" />
+    <option featureType="dependencySupport" implementationName="java:com.googlecode.json-simple:json-simple" />
+    <option featureType="dependencySupport" implementationName="java:com.comphenix.executors:BukkitExecutors" />
+    <option featureType="dependencySupport" implementationName="java:com.google.code.gson:gson" />
+    <option featureType="dependencySupport" implementationName="java:com.destroystokyo.paper:paper-api" />
+    <option featureType="dependencySupport" implementationName="java:org.ow2.asm:asm-commons" />
+    <option featureType="dependencySupport" implementationName="java:org.slf4j:slf4j-api" />
+    <option featureType="dependencySupport" implementationName="java:org.ow2.asm:asm" />
+    <option featureType="dependencySupport" implementationName="java:org.spigotmc:spigot" />
+    <option featureType="dependencySupport" implementationName="java:com.google.code.findbugs:jsr305" />
+    <option featureType="dependencySupport" implementationName="java:commons-io:commons-io" />
+    <option featureType="dependencySupport" implementationName="java:cglib:cglib-nodep" />
+    <option featureType="dependencySupport" implementationName="java:com.google.guava:guava" />
+    <option featureType="dependencySupport" implementationName="java:org.yaml:snakeyaml" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Monsters for AnimalsHomeland.net" />
+    <MESSAGE value="Fixed a bug where despawned monsters did not get killed &amp; removed correctly" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug where despawned monsters did not get killed &amp; removed correctly" />
+  </component>
+</project>

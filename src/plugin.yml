@@ -1,0 +1,6 @@
+name: Monsters
+author: uScoutz
+version: 1.0.0
+main: net.animalshomeland.monsters.Monsters
+api-version: 1.15
+depend: [GameAPI]
