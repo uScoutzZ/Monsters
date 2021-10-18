@@ -77,6 +77,7 @@ public class Game {
         itemMeta.setUnbreakable(true);
         sword.setItemMeta(itemMeta);
         player.getInventory().setItem(0, sword);
+        player.getInventory().setItem(1, ItemBuilder.create(Material.COMPASS).name(Locale.get(player, "shop_item_tracker")).build());
         player.getInventory().setHelmet(ItemBuilder.create(Material.LEATHER_HELMET).build());
         player.getInventory().setChestplate(ItemBuilder.create(Material.LEATHER_CHESTPLATE).build());
         player.getInventory().setLeggings(ItemBuilder.create(Material.LEATHER_LEGGINGS).build());

@@ -6,6 +6,7 @@ import net.animalshomeland.gameapi.user.User;
 import net.animalshomeland.monsters.Monsters;
 import net.animalshomeland.monsters.utilities.Locale;
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -51,6 +52,25 @@ public class MonstersPlayer {
             default:
                 return "§7❤❤❤";
         }
+    }
+
+    public Entity getNearestMonster() {
+        Entity nearestEntity = null;
+        double distance = 1337;
+        for(Entity entity : Monsters.getInstance().getGame().getWave().getLiving().keySet()) {
+            if(nearestEntity == null) {
+                nearestEntity = entity;
+                distance = player.getLocation().distance(entity.getLocation());
+            }
+
+            double newDistance = entity.getLocation().distance(player.getLocation());
+            if(distance > newDistance) {
+                distance = newDistance;
+                nearestEntity = entity;
+            }
+        }
+
+        return nearestEntity;
     }
 
     public void addMoney(int money) {

@@ -3,6 +3,7 @@ package net.animalshomeland.monsters.listener.player;
 import net.animalshomeland.monsters.Monsters;
 import net.animalshomeland.monsters.game.Game;
 import net.animalshomeland.monsters.game.GameState;
+import net.animalshomeland.monsters.game.MonstersPlayer;
 import net.animalshomeland.monsters.game.shop.ShopCategory;
 import net.animalshomeland.monsters.utilities.Locale;
 import org.bukkit.entity.Entity;
@@ -33,22 +34,8 @@ public class PlayerInteractListener implements Listener {
                         if(game.getWave().getLiving().size() == 0) {
                             player.sendMessage(Locale.get(player, "tracker_no-monsters"));
                         } else {
-                            Entity nearestEntity = null;
-                            double distance = 1337;
-                            for(Entity entity : game.getWave().getLiving().keySet()) {
-                                if(nearestEntity == null) {
-                                    nearestEntity = entity;
-                                    distance = player.getLocation().distance(entity.getLocation());
-                                }
-
-                                double newDistance = entity.getLocation().distance(player.getLocation());
-                                if(distance > newDistance) {
-                                    distance = newDistance;
-                                    nearestEntity = entity;
-                                }
-                            }
-                            player.sendMessage(Locale.get(player, "tracker_monster", (int) distance));
-                            player.setCompassTarget(nearestEntity.getLocation());
+                            player.sendMessage(Locale.get(player, "tracker_monster",
+                                    (int) game.getMonstersPlayer().getNearestMonster().getLocation().distance(player.getLocation())));
                         }
                     }
                 }
