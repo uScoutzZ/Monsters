@@ -2,12 +2,10 @@ package net.animalshomeland.monsters.game;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.animalshomeland.gameapi.user.User;
 import net.animalshomeland.gameapi.util.TimeUtilities;
 import net.animalshomeland.monsters.Monsters;
 import net.animalshomeland.monsters.game.mobs.Monster;
 import net.animalshomeland.monsters.utilities.Locale;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
@@ -15,7 +13,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.*;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 
@@ -61,9 +58,6 @@ public class Wave {
 
     public void spawnRandomMonster() {
         int index = new Random().nextInt(monsters.size());
-        if(monsters.get(index).getType() == EntityType.WITHER && monsters.size() != 1) {
-            index = 1;
-        }
         Monster randomMonster = monsters.get(index);
         monsters.remove(index);
         Location spawnLocation = Monsters.getInstance().getGame().getGameMap().getRandomSpawn();

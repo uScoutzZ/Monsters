@@ -31,7 +31,6 @@ public class Equipment {
             livingEntity.getEquipment().setChestplate(equipment.get(EquipmentSlot.CHEST));
             livingEntity.getEquipment().setLeggings(equipment.get(EquipmentSlot.LEGS));
             livingEntity.getEquipment().setBoots(equipment.get(EquipmentSlot.FEET));
-
         }
     }
 }

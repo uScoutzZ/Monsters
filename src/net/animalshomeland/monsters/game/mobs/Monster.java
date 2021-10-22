@@ -3,24 +3,30 @@ package net.animalshomeland.monsters.game.mobs;
 import com.google.common.reflect.ClassPath;
 import lombok.Getter;
 import lombok.Setter;
+import net.animalshomeland.gameapi.item.ItemBuilder;
 import net.animalshomeland.monsters.Monsters;
 import net.animalshomeland.monsters.game.MonstersPlayer;
 import net.animalshomeland.monsters.game.Scoreboard;
 import net.animalshomeland.monsters.game.Wave;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
+
+import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.ItemStack;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
-public abstract class Monster {
+public class Monster {
 
     @Getter @Setter
-    private int health, maxHealth, damagePerHit, minMoneyDrop = 7, maxMoneyDrop = 13;
+    private int health, maxHealth, minMoneyDrop = 7, maxMoneyDrop = 13;
     @Getter @Setter
     private EntityType type;
     @Getter @Setter
@@ -32,39 +38,47 @@ public abstract class Monster {
 
     public static HashMap<String, Monster> monstersByType = new HashMap<>();
 
-    public abstract Monster init();
+    public Monster(String name, EntityType entityType, int maxHealth, boolean baby, Equipment equipment) {
+        this.name = name;
+        type = entityType;
+        this.maxHealth = maxHealth;
+        this.baby = baby;
+        this.equipment = equipment;
+    }
 
     public static void initMonsters() {
-        ClassPath classPath = null;
-        try {
-            classPath = ClassPath.from(Monsters.class.getClassLoader());
-        } catch (IOException e) {
-            e.printStackTrace();
+        FileConfiguration fileConfiguration = YamlConfiguration.loadConfiguration(new File(Monsters.getInstance().getPath() + "/monsters.yml"));
+        for (String key : fileConfiguration.getKeys(false)) {
+            if(key.startsWith("monsters.")) {
+                String name = fileConfiguration.getString(key.replace("monsters.", ""));
+                System.out.println(key);
+                EntityType entityType = EntityType.valueOf(fileConfiguration.getString(key + ".type"));
+                int maxHealth = fileConfiguration.getInt(key + ".maxHealth");
+                boolean baby = fileConfiguration.getBoolean(key + ".baby");
+                String[] armorContents = {"helmet", "chestplate", "leggings", "boots"};
+                ItemStack[] armor = new ItemStack[4];
+                int i = 0;
+                for(String armorContent : armorContents) {
+                    if(fileConfiguration.getString(key + "." + armorContent) != null) {
+                        ItemBuilder itemBuilder = ItemBuilder.create(Material.valueOf(fileConfiguration.getString(key + "." + armorContent + ".material")));
+                        String enchants =  fileConfiguration.getString("enchants");
+                        if(enchants != null) {
+                            for(String enchantments : enchants.split(",")) {
+                                Enchantment enchantment = Enchantment.getByName(enchantments.split(":")[0]);
+                                int level = Integer.parseInt(enchantments.split(":")[1]);
+                                itemBuilder.enchant(enchantment, level);
+                            }
+                        }
+                        armor[i] = itemBuilder.build();
+                        i++;
+                    }
+                }
+
+                Equipment equipment = new Equipment(armor[0], armor[1], armor[2], armor[3]);
+
+                monstersByType.put(name, new Monster(name, entityType, maxHealth, baby, equipment));
+            }
         }
-        classPath.getTopLevelClassesRecursive("net.animalshomeland.monsters.game.mobs.types").forEach(classInfo -> {
-
-            Class c = null;
-            try {
-                c = Class.forName(classInfo.getName());
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                return;
-            }
-
-            try {
-                Object object = c.newInstance();
-                Monster monster = (Monster) object;
-                monster.init();
-
-                monstersByType.put(monster.getName(), monster);
-
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-
-        });
     }
 
     public void die() {
