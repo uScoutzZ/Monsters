@@ -2,6 +2,7 @@ package net.animalshomeland.monsters.game;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.animalshomeland.gameapi.util.Debug;
 import net.animalshomeland.gameapi.util.TimeUtilities;
 import net.animalshomeland.monsters.Monsters;
 import net.animalshomeland.monsters.game.mobs.Monster;
@@ -41,6 +42,7 @@ public class Wave {
 
         monsters = new ArrayList<>();
         living = new HashMap<>();
+
         for (String key : fileConfiguration.getKeys(true)) {
             if(key.startsWith("wave-" + waveNr + ".")) {
                 String monsterName = key.split("\\.")[1];

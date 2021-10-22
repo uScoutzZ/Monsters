@@ -49,35 +49,33 @@ public class Monster {
     public static void initMonsters() {
         FileConfiguration fileConfiguration = YamlConfiguration.loadConfiguration(new File(Monsters.getInstance().getPath() + "/monsters.yml"));
         for (String key : fileConfiguration.getKeys(false)) {
-            if(key.startsWith("monsters.")) {
-                String name = fileConfiguration.getString(key.replace("monsters.", ""));
-                System.out.println(key);
-                EntityType entityType = EntityType.valueOf(fileConfiguration.getString(key + ".type"));
-                int maxHealth = fileConfiguration.getInt(key + ".maxHealth");
-                boolean baby = fileConfiguration.getBoolean(key + ".baby");
-                String[] armorContents = {"helmet", "chestplate", "leggings", "boots"};
-                ItemStack[] armor = new ItemStack[4];
-                int i = 0;
-                for(String armorContent : armorContents) {
-                    if(fileConfiguration.getString(key + "." + armorContent) != null) {
-                        ItemBuilder itemBuilder = ItemBuilder.create(Material.valueOf(fileConfiguration.getString(key + "." + armorContent + ".material")));
-                        String enchants =  fileConfiguration.getString("enchants");
-                        if(enchants != null) {
-                            for(String enchantments : enchants.split(",")) {
-                                Enchantment enchantment = Enchantment.getByName(enchantments.split(":")[0]);
-                                int level = Integer.parseInt(enchantments.split(":")[1]);
-                                itemBuilder.enchant(enchantment, level);
-                            }
+            String name = key;
+            System.out.println("Loading monster " + key);
+            EntityType entityType = EntityType.valueOf(fileConfiguration.getString(key + ".type"));
+            int maxHealth = fileConfiguration.getInt(key + ".maxHealth");
+            boolean baby = fileConfiguration.getBoolean(key + ".baby");
+            String[] armorContents = {"helmet", "chestplate", "leggings", "boots"};
+            ItemStack[] armor = new ItemStack[4];
+            int i = 0;
+            for(String armorContent : armorContents) {
+                if(fileConfiguration.getString(key + "." + armorContent) != null) {
+                    ItemBuilder itemBuilder = ItemBuilder.create(Material.valueOf(fileConfiguration.getString(key + "." + armorContent + ".material")));
+                    String enchants =  fileConfiguration.getString(key + "." + armorContent + ".enchants");
+                    if(enchants != null) {
+                        for(String enchantments : enchants.split(",")) {
+                            Enchantment enchantment = Enchantment.getByName(enchantments.split(":")[0]);
+                            int level = Integer.parseInt(enchantments.split(":")[1]);
+                            itemBuilder.enchant(enchantment, level);
                         }
-                        armor[i] = itemBuilder.build();
-                        i++;
                     }
+                    armor[i] = itemBuilder.build();
                 }
-
-                Equipment equipment = new Equipment(armor[0], armor[1], armor[2], armor[3]);
-
-                monstersByType.put(name, new Monster(name, entityType, maxHealth, baby, equipment));
+                i++;
             }
+
+            Equipment equipment = new Equipment(armor[0], armor[1], armor[2], armor[3]);
+
+            monstersByType.put(name, new Monster(name, entityType, maxHealth, baby, equipment));
         }
     }
 
