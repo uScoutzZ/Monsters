@@ -2,10 +2,10 @@ package net.animalshomeland.monsters.game;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.animalshomeland.gameapi.util.Debug;
 import net.animalshomeland.gameapi.util.TimeUtilities;
 import net.animalshomeland.monsters.Monsters;
 import net.animalshomeland.monsters.game.mobs.Monster;
+import net.animalshomeland.monsters.game.mobs.MonsterType;
 import net.animalshomeland.monsters.utilities.Locale;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -24,7 +24,7 @@ public class Wave {
     @Getter
     private int wave;
     @Getter
-    private List<Monster> monsters;
+    private List<MonsterType> monsters;
     @Getter
     private Map<Entity, Monster> living;
     @Getter
@@ -46,8 +46,8 @@ public class Wave {
         for (String key : fileConfiguration.getKeys(true)) {
             if(key.startsWith("wave-" + waveNr + ".")) {
                 String monsterName = key.split("\\.")[1];
-                if(Monster.monstersByType.containsKey(monsterName)) {
-                    Monster monster = Monster.monstersByType.get(monsterName);
+                if(MonsterType.monstersByType.containsKey(monsterName)) {
+                    MonsterType monster = MonsterType.monstersByType.get(monsterName);
                     int amount = fileConfiguration.getInt(key);
                     for(int i = 0; i < amount; i++) {
                         monsters.add(monster);
@@ -60,31 +60,31 @@ public class Wave {
 
     public void spawnRandomMonster() {
         int index = new Random().nextInt(monsters.size());
-        Monster randomMonster = monsters.get(index);
+        MonsterType randomMonsterType = monsters.get(index);
         monsters.remove(index);
         Location spawnLocation = Monsters.getInstance().getGame().getGameMap().getRandomSpawn();
-        Entity entity = Monsters.getInstance().getGame().getGameMap().getMap().spawnEntity(spawnLocation, randomMonster.getType());
+        Entity entity = Monsters.getInstance().getGame().getGameMap().getMap().spawnEntity(spawnLocation, randomMonsterType.getType());
         LivingEntity livingEntity = (LivingEntity) entity;
         MonstersPlayer monstersPlayer = Monsters.getInstance().getGame().getMonstersPlayer();
         if(monstersPlayer.getLevel() > 0) {
-            randomMonster.setMaxHealth(randomMonster.getMaxHealth()+(monstersPlayer.getLevel())*2);
+            randomMonsterType.setMaxHealth(randomMonsterType.getMaxHealth()+(monstersPlayer.getLevel())*2);
         }
-        livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(randomMonster.getMaxHealth());
-        livingEntity.setHealth(randomMonster.getMaxHealth());
+        livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(randomMonsterType.getMaxHealth());
+        livingEntity.setHealth(randomMonsterType.getMaxHealth());
         livingEntity.setRemoveWhenFarAway(false);
 
-        if(randomMonster.getEquipment() != null) {
-            randomMonster.getEquipment().equipMonster(entity);
+        if(randomMonsterType.getEquipment() != null) {
+            randomMonsterType.getEquipment().equipMonster(entity);
         }
         if(livingEntity instanceof Ageable) {
             Ageable ageable = (Ageable) livingEntity;
-            if(randomMonster.isBaby()) {
+            if(randomMonsterType.isBaby()) {
                 ageable.setBaby();
             } else {
                 ageable.setAdult();
             }
         }
-        living.put(entity, randomMonster);
+        living.put(entity, new Monster(randomMonsterType, entity));
         if(monsters.size() != 0) {
             new BukkitRunnable() {
                 @Override

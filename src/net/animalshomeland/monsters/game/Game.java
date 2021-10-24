@@ -6,10 +6,9 @@ import net.animalshomeland.gameapi.item.ItemBuilder;
 import net.animalshomeland.gameapi.user.User;
 import net.animalshomeland.gameapi.util.ServerUtilities;
 import net.animalshomeland.monsters.Monsters;
-import net.animalshomeland.monsters.game.mobs.Monster;
+import net.animalshomeland.monsters.game.mobs.MonsterType;
 import net.animalshomeland.monsters.game.shop.Shop;
 import net.animalshomeland.monsters.utilities.Locale;
-import net.animalshomeland.monsters.utilities.LocationManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -46,7 +45,7 @@ public class Game {
         level = new Level();
         maxWaves = gameMap.getMapConfig().getInt("max-waves");
 
-        Monster.initMonsters();
+        MonsterType.initMonsters();
     }
 
     public void start() {
