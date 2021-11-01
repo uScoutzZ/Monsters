@@ -13,8 +13,8 @@ public class SkipCommand extends Command {
     @Override
     public void onPlayerExecute(Player player, String command, String[] args) {
         if(Monsters.getInstance().getGame().getGameState() == GameState.WAVE_WARUMUP) {
-            if(Monsters.getInstance().getGame().getWave().getCounter() > 10) {
-                Monsters.getInstance().getGame().getWave().setCounter(10);
+            if(Monsters.getInstance().getGame().getWave().getWarmupCountdown().getTime() > 10) {
+                Monsters.getInstance().getGame().getWave().getWarmupCountdown().setTime(10);
             }
         } else {
             player.sendMessage(Locale.get(player, "wrong-state"));

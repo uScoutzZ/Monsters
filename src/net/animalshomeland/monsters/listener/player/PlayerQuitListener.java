@@ -18,7 +18,7 @@ public class PlayerQuitListener implements Listener {
 
         Game game = Monsters.getInstance().getGame();
         if(game.getGameState() == GameState.LOBBY) {
-            game.getGameCountdown().getLobbyTask().cancel();
+            game.getGameCountdown().stop();
         } else {
             if(game.getGameState() != GameState.END) {
                 if(player == game.getPlayer()) {

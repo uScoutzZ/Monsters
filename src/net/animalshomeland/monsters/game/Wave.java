@@ -2,6 +2,7 @@ package net.animalshomeland.monsters.game;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.animalshomeland.gameapi.minigame.GameCountdown;
 import net.animalshomeland.gameapi.util.TimeUtilities;
 import net.animalshomeland.monsters.Monsters;
 import net.animalshomeland.monsters.game.mobs.Monster;
@@ -29,6 +30,8 @@ public class Wave {
     private Map<Entity, Monster> living;
     @Getter
     private long beginningTime;
+    @Getter
+    private GameCountdown warmupCountdown;
 
     public Wave(int waveNr) {
         defaultCounter = Monsters.getInstance().getGameConfig().getConfigFile().getInt("wave-warmup-timer");
@@ -124,43 +127,41 @@ public class Wave {
     public void startWarmup() {
         Monsters.getInstance().getGame().setGameState(GameState.WAVE_WARUMUP);
         Monsters.getInstance().getGame().getGameMap().changeTime();
-        Player player = Monsters.getInstance().getGame().getPlayer();
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if(counter > 0) {
-                    if(counter == defaultCounter || counter == 120 || counter == 60 || counter == 30 || counter == 20 || counter == 15 || counter == 10 || counter <= 5) {
-                        String number = "minutes";
-                        int shownCount = counter;
-                        if(counter <= 60) {
-                            number = "plural";
-                        } else {
-                            shownCount = counter/60;
-                        }
-                        if(counter == 1) {
-                            number = "singular";
-                        }
-                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0F, 1.0F);
-                        player.sendMessage(Locale.get(player, "wavestart_" + number, String.valueOf(shownCount)));
-                    }
-                    counter--;
-                } else {
-                    cancel();
-                    startWave();
-                }
-            }
-        }.runTaskTimer(Monsters.getInstance(), 0, 20);
+
+        Monsters.getInstance().getGame().setGameCountdown(
+                warmupCountdown = new GameCountdown(counter)
+                        .setLocale(Locale.class, "wavestart")
+                        .setSound(Sound.BLOCK_NOTE_BLOCK_BASS)
+                        .setActionOnFinish(players -> {
+                            startWave();
+                        }).start());
     }
 
     public void end() {
         Player player = Monsters.getInstance().getGame().getPlayer();
+        MonstersPlayer monstersPlayer = Monsters.getInstance().getGame().getMonstersPlayer();
         if(living.size() == 0) {
             player.sendMessage(Locale.get(player, "wave_success_time", wave, TimeUtilities.getReamingTime(System.currentTimeMillis()-beginningTime)));
         }
         Wave wave = new Wave(getWave()+1);
         if(wave.getRemaining() == 0 || Monsters.getInstance().getGame().getMonstersPlayer().getLifes() == 0) {
             Monsters.getInstance().getGame().setGameState(GameState.END);
-            Monsters.getInstance().getGame().getGameCountdown().startEndCounter();
+            Monsters.getInstance().getGame().setGameCountdown(
+                    new GameCountdown(Monsters.getInstance().getGameConfig().getConfigFile().getInt("end-timer"))
+                            .setLocale(Locale.class, "gameend")
+                            .setSound(Sound.BLOCK_NOTE_BLOCK_BASS)
+                            .setActionOnFinish(players -> {
+                                Monsters.getInstance().getGame().end(false);
+                            }).start());
+            String wonOrNot = "§c✗";
+            if(Monsters.getInstance().getGame().getWave().getWave() == Monsters.getInstance().getGame().getMaxWaves()
+                    && Monsters.getInstance().getGame().getWave().getLiving().size() == 0) {
+                wonOrNot = "§a✔";
+            }
+            player.sendMessage(Locale.get(player, "gameend_stats", monstersPlayer.getKills(),
+                    monstersPlayer.getDeaths(), monstersPlayer.getLevel(), monstersPlayer.getEarnedMoney(),
+                    TimeUtilities.getReamingTime(System.currentTimeMillis()-Monsters.getInstance().getGame().getBeginningTime()),
+                    wonOrNot));
         } else {
             Monsters.getInstance().getGame().setWave(wave);
             wave.startWarmup();

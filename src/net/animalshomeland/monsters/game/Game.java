@@ -3,6 +3,7 @@ package net.animalshomeland.monsters.game;
 import lombok.Getter;
 import lombok.Setter;
 import net.animalshomeland.gameapi.item.ItemBuilder;
+import net.animalshomeland.gameapi.minigame.GameCountdown;
 import net.animalshomeland.gameapi.user.User;
 import net.animalshomeland.gameapi.util.ServerUtilities;
 import net.animalshomeland.monsters.Monsters;
@@ -27,7 +28,7 @@ public class Game {
     private MonstersPlayer monstersPlayer;
     @Getter @Setter
     private Level level;
-    @Getter
+    @Getter @Setter
     private GameCountdown gameCountdown;
     @Getter
     private GameMap gameMap;
@@ -40,7 +41,6 @@ public class Game {
 
     public Game() {
         gameState = GameState.LOBBY;
-        gameCountdown = new GameCountdown();
         gameMap = new GameMap();
         level = new Level();
         maxWaves = gameMap.getMapConfig().getInt("max-waves");
